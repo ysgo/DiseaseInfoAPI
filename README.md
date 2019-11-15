@@ -52,6 +52,17 @@ Add a detailed introduction about the project here, everything you want the read
   $ source .venv/bin/activate
   ```
 
+- install python library
+
+  ```bash
+  $ pip list
+  $ pip install django
+  # config
+  $ pip install python-decouple
+  # REST Framework library
+  $ pip install djangorestframework djangorestframework-jwt
+  ```
+  
 - django project runserver
 
   ```bash
