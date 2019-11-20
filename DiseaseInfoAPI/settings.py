@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'api',
     'rest_api',
+    'chatbot'
 ]
 
 MIDDLEWARE = [
