@@ -6,5 +6,5 @@ urlpatterns = [
 
     # 두 번째 API 테스트
     path('api/', include('api.urls')),
-    path('rest_api/', include('rest_api.urls')),
+    path('main/', include('main.urls')),
 ]
