@@ -7,4 +7,5 @@ pycodestyle==2.5.0
 PyJWT==1.7.1
 python-decouple==3.3
 pytz==2019.3
+router==0.1
 sqlparse==0.3.0

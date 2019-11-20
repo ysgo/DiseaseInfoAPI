@@ -7,6 +7,7 @@ class Post(models.Model):
     subtitle = models.CharField(max_length=144, blank=True)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    test = models.CharField(max_length=150)
 
     def __str__(self):
         return '[{}] {}'.format(self.user.username, self.title)
