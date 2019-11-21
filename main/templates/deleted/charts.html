@@ -1,11 +1,6 @@
 {% extends 'main/base.html' %}
 {% load static %}
 
-{% block css %}
-  <!-- Custom styles for this template-->
-  <link href="{% static 'main/vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
-{% endblock %}
-
 {% block body %}
   <!-- Page Wrapper -->
   <div id="wrapper">
@@ -24,7 +19,7 @@
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
-        {% include 'main/_contentTables.html' %}
+        {% include 'main/_contentCharts.html' %}
         <!-- /.container-fluid -->
 
       </div>
@@ -42,11 +37,12 @@
 
   {% block scripts %}
     <!-- Page level plugins -->
-    <script src="{% static 'main/vendor/datatables/jquery.dataTables.min.js' %}"></script>
-    <script src="{% static 'main/vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
-    
+    <script src="{% static 'main/vendor/chart.js/Chart.min.js' %}"></script>
     <!-- Page level custom scripts -->
-    <script src="{% static 'main/js/demo/datatables-demo.js' %}"></script>
+
+    <script src="{% static 'main/js/demo/chart-area-demo.js' %}"></script>
+    <script src="{% static 'main/js/demo/chart-pie-demo.js' %}"></script>
+    <script src="{% static 'main/js/demo/chart-bar-demo.js' %}"></script>
   {% endblock %}
 
 {% endblock %}

@@ -1,9 +1,73 @@
 {% load static %}
-<div class="container-fluid">
+<div class="container-fluid col-9">
 
-    <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+    <!-- REST API Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">REST-API</h6>
+        </div>
+        <div class="card-body" style="margin: 1% 13%;">
+            <form action="" method="">
+                <div class="input-group mt-3 mb-3">
+                    <div class="input-group-prepend">
+                        <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown">
+                            HTTP Method
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">GET</a>
+                            <a class="dropdown-item" href="#">POST</a>
+                            <a class="dropdown-item" href="#">PUT</a>
+                            <a class="dropdown-item" href="#">DELETE</a>
+                        </div>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Enter request URL">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button">Send</button>
+                        <!-- <button class="btn btn-danger" type="button">Reset</button> -->
+                    </div>
+                </div>
+                    <div class="input-group mt-3 mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-envelope"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Account">
+                    </div>
+                    <div class="input-group mt-3 mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-lock"></i>
+                            </span>
+                        </div>
+                        <input type="password" class="form-control" placeholder="Password">
+                    </div>
+                    <div class="input-group mt-3 mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-key"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Authorization">
+                    </div>
+                    <div class="input-group-append">
+                        <input type="reset" class="btn btn-danger" value="Reset" />
+                    </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Collapsable Card Example -->
+    <div class="card shadow mb-4">
+        <!-- Card Header - Accordion -->
+        <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button"
+            aria-expanded="true" aria-controls="collapseCardExample">
+            <h6 class="m-0 font-weight-bold text-primary">Response Result</h6>
+        </a>
+        <!-- Card Content - Collapse -->
+        <div class="collapse collapse" id="collapseCardExample">
+            {% include 'main/_table.html' %}
+        </div>
     </div>
 
 </div>

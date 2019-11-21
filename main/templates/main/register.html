@@ -24,8 +24,8 @@
                 </div>
               </div>
               <div class="form-group">
-                <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                  placeholder="Email Address">
+                <input type="text" class="form-control form-control-user" id="exampleInputEmail"
+                  placeholder="UserId">
               </div>
               <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
@@ -37,24 +37,20 @@
                     placeholder="Repeat Password">
                 </div>
               </div>
-              <a href="{% url 'main:index' %}" class="btn btn-primary btn-user btn-block">
+              <a href="#" class="btn btn-primary btn-user btn-block">
                 Register Account
               </a>
               <hr>
-              <a href="{% url 'main:index' %}" class="btn btn-google btn-user btn-block">
-                <i class="fab fa-google fa-fw"></i> Register with Google
+              <a href="{% url 'main:forgot' %}" class="btn btn-google btn-user btn-block">
+                <i class="fa fa-search fa-fw"></i> Forgot Password?
+              </a>
+              <a href="{% url 'main:login' %}" class="btn btn-success btn-user btn-block">
+                <i class="fa fa-sign-in-alt fa-fw"></i> Already have an account? Login!
               </a>
               <a href="{% url 'main:index' %}" class="btn btn-facebook btn-user btn-block">
-                <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
+                <i class="fa fa-home fa-fw"></i> Go Home?
               </a>
             </form>
-            <hr>
-            <div class="text-center">
-              <a class="small" href="{% url 'main:forgot' %}">Forgot Password?</a>
-            </div>
-            <div class="text-center">
-              <a class="small" href="{% url 'main:login' %}">Already have an account? Login!</a>
-            </div>
           </div>
         </div>
       </div>
