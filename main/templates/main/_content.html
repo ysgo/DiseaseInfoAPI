@@ -6,15 +6,15 @@
             <h6 class="m-0 font-weight-bold text-primary">REST-API</h6>
         </div>
         <div class="card-body" style="margin: -2% 15%;">
-            <form action="{% url 'rest_api:generate' %}" method="POST">
+            <form action="{% url 'rest_api:generate' %}" method="POST" onsubmit="return false;">
                 {% csrf_token %}
                 <div class="input-group mt-3 mb-3">
                     <div class="input-group-prepend">
                     </div>
                     <div class="input-group-append">
-                        <input type="submit" class="btn btn-primary" value="Generate">
+                        <input type="submit" class="btn btn-primary" id="generate" value="Generate">
                     </div>
-                    <input type="text" class="form-control" placeholder="Generate Token Value" readonly>
+                    <input type="text" id="getToken" class="form-control" placeholder="Generate Token Value" readonly>
                 </div>
                 <div class="input-group mt-3 mb-3">
                     <div class="input-group-prepend">
@@ -22,7 +22,7 @@
                             <i class="fa fa-envelope"></i>
                         </span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Username" name="username" required>
+                    <input type="text" class="form-control" placeholder="Username" name="username" id="username" required>
                 </div>
                 <div class="input-group mt-3 mb-3">
                     <div class="input-group-prepend">
@@ -30,7 +30,7 @@
                             <i class="fa fa-lock"></i>
                         </span>
                     </div>
-                    <input type="password" class="form-control" placeholder="Password" name="password" required>
+                    <input type="password" class="form-control" placeholder="Password" name="password" id="password" required>
                 </div>
             </form>
             <hr>
@@ -40,9 +40,11 @@
                     <div class="input-group-prepend">
                     </div>
                     <div class="input-group-append">
-                        <input type="submit" class="btn btn-primary" value="Verify">
+                        <!-- <input type="submit" class="btn btn-primary" value="Verify"> -->
+                        <button class="btn btn-primary">Verify</button>
                     </div>
                     <input type="text" class="form-control" placeholder="Verify Token Value" readonly>
+                    <input type="text" id="getToken" class="form-control" placeholder="Authorization" name="token" required>
                 </div>
                 <div class="input-group mt-3 mb-3">
                     <div class="input-group-prepend">
@@ -50,7 +52,7 @@
                             <i class="fa fa-key"></i>
                         </span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Authorization" name="token" required>
+                    <input type="text" id="getToken" class="form-control" placeholder="Authorization" name="token" required>
                 </div>
             </form>
             <hr>
@@ -74,25 +76,14 @@
                 </div>
             </form>
             <hr>
-            <form action="{% url 'rest_api:data' %}" method="GET" onsubmit="return false;">
-                <div class="input-group mt-3 mb-3">
-                    <div class="input-group-prepend">
-                    </div>
-                    <div class="input-group-append">
-                        <input type="submit" class="btn btn-primary" value="Data-Request">
-                    </div>
-                    <!-- <input type="text" class="form-control" placeholder="Data Request " readonly> -->
+            <div class="input-group mt-3 mb-3">
+                <div class="input-group-prepend">
                 </div>
-                <div class="input-group mt-3 mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">
-                            <i class="fa fa-key"></i>
-                        </span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="Authorization" name="token" required>
+                <div class="input-group-append">
+                    <button class="btn btn-primary" id="reqData">Data-Request</button>
                 </div>
-            </form>
-            <button id="reqData">Test</button>
+                <input type="text" class="form-control" placeholder="Data Request">
+            </div>
         </div>
     </div>
 
@@ -113,18 +104,38 @@
 {% block scripts %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
+    $('#generate').on('click', function() {
+        const username = $('#username').val();
+        const password = $('#password').val();
+        $.ajax({
+            url: "{% url 'rest_api:generate' %}",
+            type: 'POST',
+            data: {
+                'username': username,
+                'password': password
+            },
+            success: function(response) {
+                console.log('success');
+                console.log(response.token);
+                $('#getToken').val(response.token);
+            }, error: function(response, status, text) {
+                console.log('error');
+            }
+        });
+    })
+
     $('#reqData').on('click', function() {
         $.ajax({
             url: "{% url 'rest_api:data' %}",
             type: 'GET',
             headers: {
-                'Authorization': 'jwt ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNTc1MDAxNjY4LCJlbWFpbCI6IiIsIm9yaWdfaWF0IjoxNTc0Mzk2ODY4fQ.k8iPVxWEjd8_IdC8fLzj0nt9SIKFvMB9-P7wLv6SXis'
+                'Authorization': 'jwt '
             },
             success: function(response) {
-                console.log('success')
-                console.log(response[0].fields)
+                console.log('success');
+                console.log(response);
             }, error: function(response, status, text) {
-                console.log('error')
+                console.log('error');
             }
         });
     })
