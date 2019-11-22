@@ -129,11 +129,30 @@
             url: "{% url 'rest_api:data' %}",
             type: 'GET',
             headers: {
-                'Authorization': 'jwt '
+                'Authorization': 'jwt ' + ''
             },
             success: function(response) {
-                console.log('success');
-                console.log(response);
+                console.log('success')
+                console.log(response)
+            }, error: function(response, status, text) {
+                console.log('error')
+            }
+        });
+    })
+</script>
+
+<script>
+    $('#generate').on('click', function() {
+        $.ajax({
+            url: "{% url 'rest_api:generate' %}",
+            type: 'POST',
+            data:{
+                username : $("#username").val(),
+                password : $("#password").val()
+            },
+            success: function(response) {
+                console.log('success')
+                console.log(response)
             }, error: function(response, status, text) {
                 console.log('error');
             }
