@@ -1,58 +1,93 @@
 {% load static %}
 <div class="container-fluid col-9">
-
     <!-- REST API Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">REST-API</h6>
         </div>
-        <div class="card-body" style="margin: 1% 13%;">
-            <form action="" method="">
+        <div class="card-body" style="margin: -2% 15%;">
+            <form action="{% url 'rest_api:generate' %}" method="POST">
                 <div class="input-group mt-3 mb-3">
                     <div class="input-group-prepend">
-                        <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown">
-                            HTTP Method
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">GET</a>
-                            <a class="dropdown-item" href="#">POST</a>
-                            <a class="dropdown-item" href="#">PUT</a>
-                            <a class="dropdown-item" href="#">DELETE</a>
-                        </div>
                     </div>
-                    <input type="text" class="form-control" placeholder="Enter request URL">
                     <div class="input-group-append">
-                        <button class="btn btn-primary" type="button">Send</button>
-                        <!-- <button class="btn btn-danger" type="button">Reset</button> -->
+                        <input type="submit" class="btn btn-primary" value="Generate">
                     </div>
+                    <input type="text" class="form-control" placeholder="Generate Token Value" readonly>
                 </div>
-                    <div class="input-group mt-3 mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">
-                                <i class="fa fa-envelope"></i>
-                            </span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Account">
+                <div class="input-group mt-3 mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fa fa-envelope"></i>
+                        </span>
                     </div>
-                    <div class="input-group mt-3 mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">
-                                <i class="fa fa-lock"></i>
-                            </span>
-                        </div>
-                        <input type="password" class="form-control" placeholder="Password">
+                    <input type="text" class="form-control" placeholder="Username" name="username" required>
+                </div>
+                <div class="input-group mt-3 mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fa fa-lock"></i>
+                        </span>
                     </div>
-                    <div class="input-group mt-3 mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">
-                                <i class="fa fa-key"></i>
-                            </span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Authorization">
+                    <input type="password" class="form-control" placeholder="Password" name="password" required>
+                </div>
+            </form>
+            <hr>
+            <form action="{% url 'rest_api:verify' %}" method="POST">
+                <div class="input-group mt-3 mb-3">
+                    <div class="input-group-prepend">
                     </div>
                     <div class="input-group-append">
-                        <input type="reset" class="btn btn-danger" value="Reset" />
+                        <input type="submit" class="btn btn-primary" value="Verify">
                     </div>
+                    <input type="text" class="form-control" placeholder="Verify Token Value" readonly>
+                </div>
+                <div class="input-group mt-3 mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fa fa-key"></i>
+                        </span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Authorization" name="token" required>
+                </div>
+            </form>
+            <hr>
+            <form action="{% url 'rest_api:refresh' %}" method="POST">
+                <div class="input-group mt-3 mb-3">
+                    <div class="input-group-prepend">
+                    </div>
+                    <div class="input-group-append">
+                        <input type="submit" class="btn btn-primary" value="Refresh">
+                    </div>
+                    <input type="text" class="form-control" placeholder="Refresh Token Value" readonly>
+                </div>
+                <div class="input-group mt-3 mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fa fa-key"></i>
+                        </span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Authorization" name="token" required>
+                </div>
+            </form>
+            <hr>
+            <form action="{% url 'rest_api:data' %}" method="GET">
+                <div class="input-group mt-3 mb-3">
+                    <div class="input-group-prepend">
+                    </div>
+                    <div class="input-group-append">
+                        <input type="submit" class="btn btn-primary" value="Data-Request">
+                    </div>
+                    <!-- <input type="text" class="form-control" placeholder="Data Request " readonly> -->
+                </div>
+                <div class="input-group mt-3 mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fa fa-key"></i>
+                        </span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Authorization" name="token" required>
+                </div>
             </form>
         </div>
     </div>
