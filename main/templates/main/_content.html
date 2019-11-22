@@ -6,13 +6,13 @@
             <h6 class="m-0 font-weight-bold text-primary">REST-API</h6>
         </div>
         <div class="card-body" style="margin: -2% 15%;">
-            <form action="{% url 'rest_api:generate' %}" method="POST">
+            <form action="{% url 'rest_api:generate' %}" method="POST" onsubmit="return false;">
                 {% csrf_token %}
                 <div class="input-group mt-3 mb-3">
                     <div class="input-group-prepend">
                     </div>
                     <div class="input-group-append">
-                        <input type="submit" class="btn btn-primary" value="Generate">
+                        <input type="submit" id="generate" class="btn btn-primary" value="Generate">
                     </div>
                     <input type="text" class="form-control" placeholder="Generate Token Value" readonly>
                 </div>
@@ -22,7 +22,7 @@
                             <i class="fa fa-envelope"></i>
                         </span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Username" name="username" required>
+                    <input type="text" class="form-control" placeholder="Username" name="username" id="username" required>
                 </div>
                 <div class="input-group mt-3 mb-3">
                     <div class="input-group-prepend">
@@ -30,7 +30,7 @@
                             <i class="fa fa-lock"></i>
                         </span>
                     </div>
-                    <input type="password" class="form-control" placeholder="Password" name="password" required>
+                    <input type="password" class="form-control" placeholder="Password" name="password" id="password" required>
                 </div>
             </form>
             <hr>
@@ -92,7 +92,8 @@
                     <input type="text" class="form-control" placeholder="Authorization" name="token" required>
                 </div>
             </form>
-            <button id="reqData">Test</button>
+            <button id="reqData" class="btn btn-primary">Test</button>
+            <!-- <button id="generate" class="btn btn-primary">Test</button> -->
         </div>
     </div>
 
@@ -118,11 +119,30 @@
             url: "{% url 'rest_api:data' %}",
             type: 'GET',
             headers: {
-                'Authorization': 'jwt ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNTc1MDAxNjY4LCJlbWFpbCI6IiIsIm9yaWdfaWF0IjoxNTc0Mzk2ODY4fQ.k8iPVxWEjd8_IdC8fLzj0nt9SIKFvMB9-P7wLv6SXis'
+                'Authorization': 'jwt ' + ''
             },
             success: function(response) {
                 console.log('success')
-                console.log(response[0].fields)
+                console.log(response)
+            }, error: function(response, status, text) {
+                console.log('error')
+            }
+        });
+    })
+</script>
+
+<script>
+    $('#generate').on('click', function() {
+        $.ajax({
+            url: "{% url 'rest_api:generate' %}",
+            type: 'POST',
+            data:{
+                username : $("#username").val(),
+                password : $("#password").val()
+            },
+            success: function(response) {
+                console.log('success')
+                console.log(response)
             }, error: function(response, status, text) {
                 console.log('error')
             }
