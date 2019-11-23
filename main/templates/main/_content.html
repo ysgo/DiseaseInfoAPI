@@ -6,13 +6,13 @@
             <h6 class="m-0 font-weight-bold text-primary">REST-API</h6>
         </div>
         <div class="card-body" style="margin: -2% 15%;">
-            <form action="{% url 'rest_api:generate' %}" method="POST" onsubmit="return false;">
+            <form onsubmit="return false;">
                 {% csrf_token %}
                 <div class="input-group mt-3 mb-3">
                     <div class="input-group-prepend">
                     </div>
                     <div class="input-group-append">
-                        <input type="submit" class="btn btn-primary" id="generate" value="Generate">
+                        <input type="submit" class="btn btn-primary req" id="reqGenerate" value="Token-Generate">
                     </div>
                     <input type="text" id="getToken" class="form-control" placeholder="Generate Token Value" readonly>
                 </div>
@@ -34,47 +34,23 @@
                 </div>
             </form>
             <hr>
-            <form action="{% url 'rest_api:verify' %}" method="POST">
-                {% csrf_token %}
-                <div class="input-group mt-3 mb-3">
-                    <div class="input-group-prepend">
-                    </div>
-                    <div class="input-group-append">
-                        <!-- <input type="submit" class="btn btn-primary" value="Verify"> -->
-                        <button class="btn btn-primary">Verify</button>
-                    </div>
-                    <input type="text" class="form-control" placeholder="Verify Token Value" readonly>
-                    <input type="text" id="getToken" class="form-control" placeholder="Authorization" name="token" required>
+            <div class="input-group mt-3 mb-3">
+                <div class="input-group-prepend">
                 </div>
-                <div class="input-group mt-3 mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">
-                            <i class="fa fa-key"></i>
-                        </span>
-                    </div>
-                    <input type="text" id="getToken" class="form-control" placeholder="Authorization" name="token" required>
+                <div class="input-group-append">
+                    <button class="btn btn-primary" id="reqVerify">Token-Verify</button>
                 </div>
-            </form>
+                <input type="text" class="form-control" id="resVerify" placeholder="Token Vefiry Result">
+            </div>
             <hr>
-            <form action="{% url 'rest_api:refresh' %}" method="POST">
-                {% csrf_token %}
-                <div class="input-group mt-3 mb-3">
-                    <div class="input-group-prepend">
-                    </div>
-                    <div class="input-group-append">
-                        <input type="submit" class="btn btn-primary" value="Refresh">
-                    </div>
-                    <input type="text" class="form-control" placeholder="Refresh Token Value" readonly>
+            <div class="input-group mt-3 mb-3">
+                <div class="input-group-prepend">
                 </div>
-                <div class="input-group mt-3 mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">
-                            <i class="fa fa-key"></i>
-                        </span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="Authorization" name="token" required>
+                <div class="input-group-append">
+                    <button class="btn btn-primary" id="reqRefresh">Token-Refresh</button>
                 </div>
-            </form>
+                <input type="text" class="form-control" id="getRetoken" placeholder="Token Refresh Value">
+            </div>
             <hr>
             <div class="input-group mt-3 mb-3">
                 <div class="input-group-prepend">
@@ -82,7 +58,7 @@
                 <div class="input-group-append">
                     <button class="btn btn-primary" id="reqData">Data-Request</button>
                 </div>
-                <input type="text" class="form-control" placeholder="Data Request">
+                <input type="text" class="form-control" id="resData" placeholder="Data Response Result">
             </div>
         </div>
     </div>
@@ -103,60 +79,6 @@
 </div>
 {% block scripts %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script>
-    $('#generate').on('click', function() {
-        const username = $('#username').val();
-        const password = $('#password').val();
-        $.ajax({
-            url: "{% url 'rest_api:generate' %}",
-            type: 'POST',
-            data: {
-                'username': username,
-                'password': password
-            },
-            success: function(response) {
-                console.log('success');
-                console.log(response.token);
-                $('#getToken').val(response.token);
-            }, error: function(response, status, text) {
-                console.log('error');
-            }
-        });
-    })
-
-    $('#reqData').on('click', function() {
-        $.ajax({
-            url: "{% url 'rest_api:data' %}",
-            type: 'GET',
-            headers: {
-                'Authorization': 'jwt ' + ''
-            },
-            success: function(response) {
-                console.log('success')
-                console.log(response)
-            }, error: function(response, status, text) {
-                console.log('error')
-            }
-        });
-    })
-</script>
-
-<script>
-    $('#generate').on('click', function() {
-        $.ajax({
-            url: "{% url 'rest_api:generate' %}",
-            type: 'POST',
-            data:{
-                username : $("#username").val(),
-                password : $("#password").val()
-            },
-            success: function(response) {
-                console.log('success')
-                console.log(response)
-            }, error: function(response, status, text) {
-                console.log('error');
-            }
-        });
-    })
-</script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
+<script src="{% static 'main/js/reqAjax.js' %}"></script>
 {% endblock %} 

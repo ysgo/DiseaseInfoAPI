@@ -13,10 +13,3 @@ def data(request):
     data = Disease.objects.all()
     data_list = serializers.serialize('json', data)
     return HttpResponse(data_list, content_type='text/json-comment-filtered')
-
-
-def verify(request):
-    data = request.POST.get('token')
-    print(f'Test : {data}')
-    token = serializers.serialize('json', data)
-    return HttpResponse(token, content_type='text/json-comment-filtered')

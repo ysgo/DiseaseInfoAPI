@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from rest_api.models import Disease
 
 def index(request):
     return render(request, 'main/index.html')
@@ -13,4 +14,6 @@ def forgot(request):
     return render(request, 'main/forgot-password.html')
 
 def tables(request):
-    return render(request, 'main/tables.html')
+    diseases = Disease.objects.all()
+    print(diseases)
+    return render(request, 'main/tables.html', {'diseases':diseases})
