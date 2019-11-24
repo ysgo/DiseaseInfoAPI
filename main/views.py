@@ -3,6 +3,7 @@ from api.models import Disease
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+from django.contrib.sessions.models import Session
 
 def index(request):
     return render(request, 'main/index.html')

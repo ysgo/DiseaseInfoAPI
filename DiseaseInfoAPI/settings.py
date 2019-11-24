@@ -149,7 +149,7 @@ JWT_AUTH = {
     # JWT 토큰을 갱신할 수 있게 할지 여부를 결정
     'JWT_ALLOW_REFRESH': True,
     # JWT 토큰의 유효기간 설정
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=300),
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=600),
     # JWT 토큰 갱신의 유효기간 설정
     'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(seconds=200),
 }
