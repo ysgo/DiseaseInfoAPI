@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from rest_api.models import Disease
+from api.models import Disease
+from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 def index(request):
     return render(request, 'main/index.html')
@@ -10,10 +13,6 @@ def register(request):
 def login(request):
     return render(request, 'main/login.html')
     
-def forgot(request):
-    return render(request, 'main/forgot-password.html')
-
 def tables(request):
     diseases = Disease.objects.all()
-    print(diseases)
     return render(request, 'main/tables.html', {'diseases':diseases})

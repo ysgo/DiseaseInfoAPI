@@ -1,18 +1,16 @@
 from django.shortcuts import render
-from rest_framework import viewsets
-from .serializers import PostSerializer
-from .models import Post
-from rest_framework import permissions
-from django.http import JsonResponse
+from .models import Disease
+from .serializers import DiseaseSerializer
+from django.core import serializers
+from django.http import HttpResponse
+from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
-# 프레임워크에서 API 조작을 돕기 위해 제공하는 페이지 사용
-class PostView(viewsets.ModelViewSet):
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
-    permission_classes = (permissions.IsAuthenticated,)
-
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
-        # serializer.data를 출력할 경우 직렬화한 JSON/Dictionary 타입의 데이터를 모두 보여줌
-        print(serializer.data)
-
+@api_view(['GET'])
+@permission_classes((IsAuthenticated,))
+@authentication_classes((JSONWebTokenAuthentication,))
+def data(request):
+    diseases = Disease.objects.all()
+    serializer = serializers.serialize('json', diseases)
+    return HttpResponse(serializer, content_type='text/json-comment-filtered')

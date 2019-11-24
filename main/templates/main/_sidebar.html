@@ -25,35 +25,34 @@
   <div class="sidebar-heading">
       Interface
   </div>
-
-  <!-- Nav Item - Pages Collapse Menu -->
+  {% if user.is_active %}
+  <!-- Nav Item - Logout -->
   <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
-      aria-controls="collapsePages">
-      <i class="fas fa-fw fa-user"></i>
-      <span>User</span>
-    </a>
-    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <h6 class="collapse-header">User Screens:</h6>
-        {% if request.resolver_match.url_name == 'signup' %}
-        <h1 class='text-center'>회원가입</h1>
-        {% elif request.resolver_match.url_name == 'login' %}
-        <h1 class='text-center'>로그인</h1>
-        {% endif %}
-        <a class="collapse-item" href="{% url 'main:login' %}">Login</a>
-        <a class="collapse-item" href="{% url 'main:register' %}">Register</a>
-        <a class="collapse-item" href="{% url 'main:forgot' %}">Forgot Password</a>
-      </div>
-    </div>
+    <a class="nav-link" href="" id="logout">
+      <i class="fas fa-fw fa-sign-out-alt"></i>
+      <span>Logout</span></a>
   </li>
-
   <!-- Nav Item - Tables -->
   <li class="nav-item">
     <a class="nav-link" href="{% url 'main:tables' %}">
       <i class="fas fa-fw fa-table"></i>
       <span>Tables</span></a>
   </li>
+  {% else %}
+  <!-- Nav Item - Login -->
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'main:login' %}">
+      <i class="fas fa-fw fa-sign-in-alt"></i>
+      <span>Login</span></a>
+  </li>
+
+  <!-- Nav Item - Register -->
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'main:register' %}">
+      <i class="fas fa-fw fa-user"></i>
+      <span>Register</span></a>
+  </li>
+  {% endif %}
 
   <!-- Divider -->
   <hr class="sidebar-divider d-none d-md-block">

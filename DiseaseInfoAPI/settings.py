@@ -20,10 +20,18 @@ INSTALLED_APPS = [
 
     'bootstrap4',
     'rest_framework',
-    'api',
-    'rest_api',
+    'rest_framework.authtoken',
+    'rest_auth',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
     'main',
+    'api',
 ]
+
+SITE_ID = 1
+REST_USE_JWT = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -129,6 +137,9 @@ REST_FRAMEWORK = {
     )
 }
 
+ACCOUNT_EMAIL_REQUIRED = False
+ACCOUNT_EMAIL_VERIFICATION = None
+
 JWT_AUTH = {
     # JWT의 비밀키를 어떤걸 사용할지 결정. 현재는 장고와 같은 키 사용. 실제 사용시에는 다른 키 사용 권장
     # 그렇다면 어떤 키를 사용하는지와 생성하는지 의문!
@@ -138,7 +149,7 @@ JWT_AUTH = {
     # JWT 토큰을 갱신할 수 있게 할지 여부를 결정
     'JWT_ALLOW_REFRESH': True,
     # JWT 토큰의 유효기간 설정
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=300),
     # JWT 토큰 갱신의 유효기간 설정
-    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=1),
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(seconds=200),
 }

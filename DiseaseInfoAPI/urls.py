@@ -1,11 +1,11 @@
 from django.contrib import admin
 from django.urls import path, include
+from rest_auth.views import LogoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
-    # 두 번째 API 테스트
-    path('api/', include('api.urls')),
     path('main/', include('main.urls')),
-    path('rest_api/', include('rest_api.urls')),
+    path('api/', include('api.urls')),
+    path('rest-auth/', include('rest_auth.urls')),
+    path('rest-auth/registration/', include('rest_auth.registration.urls')),
 ]

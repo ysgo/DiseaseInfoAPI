@@ -1,32 +1,29 @@
-const csrftoken = Cookies.get('csrftoken');
     $('#reqGenerate').on('click', function() {
         $.ajax({
-            // url: "{% url 'rest_api:generate' %}",
-            url: "/rest_api/token/",
-            type: 'POST',
-            data: {
-                'username': $('#username').val(),
-                'password': $('#password').val()
-            },
-            dataType:'json',
-            headers: { 'X-CSRFToken': csrftoken },
-            success: function(response) {
-                console.log('Success Response : ' + response.token);
-                $('#getToken').val(response.token);
-            }, error: function(request, status, error) {
-                console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error);
-            }
+          url: "/api/token/",
+          type: "POST",
+          data: {
+            username: $("#username").val(),
+            password: $("#password").val()
+          },
+          dataType: "json",
+          headers: { "X-CSRFToken": csrftoken, 'csrftoken': csrftoken },
+          success: function(response) {
+            console.log("Success Response : " + response.token);
+            $("#getToken").val(response.token);
+          }, error: function(request, status, error) {
+            console.log("code = " + request.status + " message = " + request.responseText + " error = " + error);
+          }
         });
     })
 
     $('#reqVerify').on('click', function() {
         $.ajax({
-            // url: "{% url 'rest_api:verify' %}",
-            url: "/rest_api/token/verify/",
+            url: "/api/token/verify/",
             type: 'POST',
             data: {'token': $('#getToken').val() },
             dataType:'json',
-            headers: { 'X-CSRFToken': csrftoken },
+            headers: { "X-CSRFToken": csrftoken, 'csrftoken': csrftoken },
             success: function(response) {
                 $('#resVerify').val('The token is authenticated');
                 console.log('success')
@@ -39,12 +36,11 @@ const csrftoken = Cookies.get('csrftoken');
 
     $('#reqRefresh').on('click', function() {
         $.ajax({
-            // url: "{% url 'rest_api:refresh' %}",
-            url: "/rest_api/token/refresh/",
+            url: "/api/token/refresh/",
             type: 'POST',
             data: {'token': $('#getToken').val() },
             dataType:'json',
-            headers: { 'X-CSRFToken': csrftoken },
+            headers: { "X-CSRFToken": csrftoken, 'csrftoken': csrftoken },
             success: function(response) {
                 console.log('success')
                 console.log('Success Response : ' + response)
@@ -58,8 +54,7 @@ const csrftoken = Cookies.get('csrftoken');
 
     $('#reqData').on('click', function() {
         $.ajax({
-            // url: "{% url 'rest_api:data' %}",
-            url: "/rest_api/data/",
+            url: "/api/data/",
             type: 'GET',
             dataType:'json',
             headers: {
