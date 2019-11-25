@@ -9,5 +9,6 @@ app_name = 'chatbot'
 urlpatterns = [
     path('', views.write, name='write'),
     path('send/', views.send, name='send'),
+    path('<str:telegram_token>', views.webhook, name='webhook'),
 ]
 
