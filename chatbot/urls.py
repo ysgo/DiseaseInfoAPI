@@ -7,7 +7,7 @@ token = config('TOKEN')
 app_name = 'chatbot'
 
 urlpatterns = [
-    path(f'{base}/bot{token}/getUpdates', views.send, name='send'),
-    path(f'{base}/bot{token}/setWebhook?url=https://7df8ca78.ngrok.io/{token}', views.follow, name='follow'),
+    path('', views.write, name='write'),
+    path('send/', views.send, name='send'),
 ]
 
