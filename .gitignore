@@ -5,6 +5,7 @@
 *.zip
 *.gz
 *.7z
+*.exe
 
 ### Django ###
 *.log

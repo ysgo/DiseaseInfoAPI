@@ -1,3 +1,7 @@
 from django.contrib import admin
+from api.models import Disease
 
-# Register your models here.
+class DiseaseAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'name', 'symptom', 'diagnosis')
+
+admin.site.register(Disease, DiseaseAdmin)

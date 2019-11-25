@@ -13,6 +13,7 @@ import json
 base = "https://api.telegram.org"
 token = config('TOKEN')
 chat_id = config('CHATID')
+ngrok = config('NGROK')
 
 # https://api.telegram.org/bot토큰값/deletewebhook
 # @app.route('/')
@@ -39,7 +40,7 @@ def send(request):
 # @ensure_csrf_cookie
 def webhook(request, telegram_token):
     #1. webhook을 통해 telegram에 보낸 요청 안에 있는 메시지를 가져와서 
-    url = f'{base}/bot{telegram_token}/setWebhook?url=https://bf90e2e9.ngrok.io/{telegram_token}'
+    url = f'{base}/bot{telegram_token}/setWebhook?url={ngrok}/{telegram_token}'
     
     #2. 그대로 전송
     requests.get(url).json()

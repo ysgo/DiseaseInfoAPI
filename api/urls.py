@@ -1,21 +1,13 @@
-from django.urls import path, include
-from rest_framework.urlpatterns import format_suffix_patterns
-from .views import PostView
+from django.urls import path
+from . import views
+from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token, refresh_jwt_token
 
-post_list = PostView.as_view({
-    'post': 'create',
-    'get': 'list'
-})
+app_name = 'api'
 
-post_detail = PostView.as_view({
-    'get': 'retrieve',
-    'put': 'update',
-    'patch': 'partial_update',
-    'delete': 'destroy'
-})
-
-urlpatterns = format_suffix_patterns([
-    path('auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('posts/', post_list, name='post_list'),
-    path('posts/<int:pk>/', post_detail, name='post_detail'),
-])
+urlpatterns = [
+    path('token/', obtain_jwt_token, name='generate'),
+    path('token/verify/', verify_jwt_token, name='verify'),
+    path('token/refresh/', refresh_jwt_token, name='refresh'),
+    path('data/', views.data, name='data'),
+    path('data/<int:pk_id>/', views.choose, name='choose'),
+]

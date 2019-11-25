@@ -4,9 +4,9 @@ from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
-    # 두 번째 API 테스트
-    path('', include('chatbot.urls')),
+    path('main/', include('main.urls')),
     path('api/', include('api.urls')),
-    path('rest_api/', include('rest_api.urls')),
+    path('rest-auth/', include('rest_auth.urls')),
+    path('rest-auth/registration/', include('rest_auth.registration.urls')),
+    path('', include('chatbot.urls')),
 ]

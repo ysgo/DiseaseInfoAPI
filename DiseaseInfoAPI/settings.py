@@ -18,12 +18,21 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'bootstrap4',
     'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
+    'main',
     'api',
-    'rest_api',
     'chatbot',
-    
 ]
+
+SITE_ID = 1
+REST_USE_JWT = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -124,8 +133,12 @@ REST_FRAMEWORK = {
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     )
 }
+
+ACCOUNT_EMAIL_REQUIRED = False
+ACCOUNT_EMAIL_VERIFICATION = None
 
 JWT_AUTH = {
     # JWT의 비밀키를 어떤걸 사용할지 결정. 현재는 장고와 같은 키 사용. 실제 사용시에는 다른 키 사용 권장
@@ -136,7 +149,7 @@ JWT_AUTH = {
     # JWT 토큰을 갱신할 수 있게 할지 여부를 결정
     'JWT_ALLOW_REFRESH': True,
     # JWT 토큰의 유효기간 설정
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7),
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=600),
     # JWT 토큰 갱신의 유효기간 설정
-    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=28),
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(seconds=200),
 }
