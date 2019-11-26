@@ -22,11 +22,7 @@
     })
 
     $('#reqVerify').on('click', function() {
-        if($('#getReToken').val() == '') {
-            getToken = $('#getToken').val();
-        } else {
-            getToken = $('#getReToken').val();
-        }
+        getToken = $('#getToken').val();
         if(getToken != null) {
             $.ajax({
                 url: "/api/token/verify/",
