@@ -15,7 +15,8 @@ token = config('TOKEN')
 chat_id = config('CHATID')
 
 
-@csrf_exempt
+# @csrf_exempt
+
 def webhook(request, telegram_token):
     url = f'{base}/bot{telegram_token}/setWebhook?url=https://diseaseinfoapi.herokuapp.com/{telegram_token}'
     requests.get(url).json()
