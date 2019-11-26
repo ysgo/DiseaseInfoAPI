@@ -18,7 +18,7 @@ ngrok = config('NGROK')
 
 @csrf_exempt
 def webhook(request, telegram_token):
-    url = f'{base}/bot{telegram_token}/setWebhook?url={ngrok}/{telegram_token}'
+    url = f'{base}/bot{telegram_token}/setWebhook?url=https://diseaseinfoapi.herokuapp.com/{telegram_token}'
     requests.get(url).json()
     body = request.body
     body = body.decode('utf-8')
