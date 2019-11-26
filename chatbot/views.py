@@ -26,23 +26,19 @@ def webhook(request, telegram_token):
     if res.get('message'):
         text = res.get('message').get('text')
         username = res.get('message').get('from').get('last_name') + res.get('message').get('from').get('first_name')
-        print(f'1111{username}')
         method = 'sendMessage'
         if Disease.objects.filter(name=text).exists():
             index = Disease.objects.get(name=text).pk
-            print(f'2222{index}')
             data = {
                 'username': username,
                 'password': 'qlalfqjsgh',
             }
             res = requests.post(config('URL_GENERATE'), data=data).json()
-            print(f'3333{res}')
             headers = {
                 'Authorization': 'jwt ' + res.get('token'),
             }
             url_data = config('URL_DATA')
             getData = requests.get(f'{url_data}/{index}/', headers=headers).json()
-            print(f'4444{getData}')
             text = '[증상] : ' + getData[0].get('fields').get('symptom') + '\n\n[진단] : ' + getData[0].get('fields').get('diagnosis')
         else:
             db = '[ '
@@ -52,6 +48,5 @@ def webhook(request, telegram_token):
             text = f'해당 키워드에 일치하는 정보가 없습니다. \n{db}'
         url = f'{base}/bot{token}/{method}?chat_id={chat_id}&text={text}'
         requests.get(url)
-    return render(request, 'chatbot/write.html')
-    #return HttpResponse(f'/{telegram_token}')
+    return HttpResponse(f'/{telegram_token}')
 
