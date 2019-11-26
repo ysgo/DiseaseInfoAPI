@@ -1,5 +1,6 @@
 import os, datetime
 from decouple import config
+import django_heroku
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -38,6 +39,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -153,3 +155,5 @@ JWT_AUTH = {
     # JWT 토큰 갱신의 유효기간 설정
     'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(seconds=200),
 }
+
+django_heroku.settings(locals())
