@@ -15,8 +15,7 @@ token = config('TOKEN')
 chat_id = config('CHATID')
 
 
-# @csrf_exempt
-
+@csrf_exempt
 def webhook(request, telegram_token):
     url = f'{base}/bot{telegram_token}/setWebhook?url=https://diseaseinfoapi.herokuapp.com/{telegram_token}'
     requests.get(url).json()
@@ -27,19 +26,23 @@ def webhook(request, telegram_token):
     if res.get('message'):
         text = res.get('message').get('text')
         username = res.get('message').get('from').get('last_name') + res.get('message').get('from').get('first_name')
+        print(f'1111{username}')
         method = 'sendMessage'
         if Disease.objects.filter(name=text).exists():
             index = Disease.objects.get(name=text).pk
+            print(f'2222{index}')
             data = {
                 'username': username,
                 'password': 'qlalfqjsgh',
             }
             res = requests.post(config('URL_GENERATE'), data=data).json()
+            print(f'3333{res}')
             headers = {
                 'Authorization': 'jwt ' + res.get('token'),
             }
             url_data = config('URL_DATA')
             getData = requests.get(f'{url_data}/{index}/', headers=headers).json()
+            print(f'4444{getData}')
             text = '[증상] : ' + getData[0].get('fields').get('symptom') + '\n\n[진단] : ' + getData[0].get('fields').get('diagnosis')
         else:
             db = '[ '
