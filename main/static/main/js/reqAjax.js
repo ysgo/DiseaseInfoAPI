@@ -18,11 +18,11 @@
             });
         } else {
             $('#getToken').val('토큰값이 필요합니다. 회원가입 및 로그인을 해주세요.');
-
         }
     })
 
     $('#reqVerify').on('click', function() {
+        getToken = $('#getToken').val();
         if(getToken != null) {
             $.ajax({
                 url: "/api/token/verify/",
@@ -51,7 +51,6 @@
                 dataType:'json',
                 headers: { "X-CSRFToken": csrftoken, 'csrftoken': csrftoken },
                 success: function(response) {
-                    $('#getToken').val(response.token);
                     $('#getRetoken').val(response.token);
                 }, error: function(request, status, error) {
                     console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error);
@@ -63,6 +62,9 @@
     })
 
     $('#reqData').on('click', function() {
+        if($('#getReToken').val() == '') {
+            getToken = $('#getToken').val();
+        }
         if(getToken != null) {
             $.ajax({
                 url: "/api/data/",
