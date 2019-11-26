@@ -48,5 +48,6 @@ def webhook(request, telegram_token):
             text = f'해당 키워드에 일치하는 정보가 없습니다. \n{db}'
         url = f'{base}/bot{token}/{method}?chat_id={chat_id}&text={text}'
         requests.get(url)
-    return HttpResponse(f'/{telegram_token}')
+    return render(request, 'chatbot/write.html')
+    #return HttpResponse(f'/{telegram_token}')
 
