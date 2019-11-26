@@ -14,7 +14,6 @@ import json
 base = "https://api.telegram.org"
 token = config('TOKEN')
 chat_id = config('CHATID')
-ngrok = config('NGROK')
 
 @csrf_exempt
 def webhook(request, telegram_token):
